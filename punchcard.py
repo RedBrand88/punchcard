@@ -11,6 +11,7 @@ def main():
         #read from file with statement
         line = ""
         punchtoadd = ""
+        message = ""
         with txtreader(timecardpath) as readFile:
         #check which punches have been tracked
             for textline in readFile:
@@ -19,12 +20,15 @@ def main():
                 if "punch in" in line:
                     x.setpunches("punch in", punch)
                     punchtoadd = "lunch out"
+                    message = "Have a nice lunch!"
                 elif "lunch out" in line:
                     x.setpunches("lunch out", punch)
                     punchtoadd = "lunch in"
+                    message = "Welcome back to work!"
                 elif "lunch in" in line:
                     x.setpunches("lunch in", punch)
                     punchtoadd = "punch out"
+                    message = "Drive safe!"
         
         if punchtoadd == "":
             punchtoadd = "punch in"
@@ -33,6 +37,7 @@ def main():
         with textfilecreator(timecardpath) as appFile:
             appFile.write(x.getPunchTime(punchtoadd))
 
+        print(message)
         print("Chunk Chunk")
     else:
         punchtoadd = "punch in"
