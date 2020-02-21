@@ -28,14 +28,20 @@ def main():
                 elif "lunch in" in line:
                     x.setpunches("lunch in", punch)
                     punchtoadd = "punch out"
-                    message = "Drive safe!"
+                    message = ""
         
         if punchtoadd == "":
             punchtoadd = "punch in"
 
         x.punch()
-        with textfilecreator(timecardpath) as appFile:
-            appFile.write(x.getPunchTime(punchtoadd))
+        if punchtoadd is not "punch out":
+            with textfilecreator(timecardpath) as appFile:
+                appFile.write(x.getPunchTime(punchtoadd))
+        else:
+            with textfilecreator(timecardpath) as appFile:
+                appFile.write(x.getPunchTime(punchtoadd))
+                appFile.write(f"\n\n\nTotal Hours: {x.weekly_total_hours}")
+                message = f"You have worked {x.weekly_total_hours} hours today. Drive safe!"
 
         print(message)
         print("Chunk Chunk")
