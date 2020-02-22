@@ -76,7 +76,7 @@ class timecard:
         elif self.day["punch out"] == 0:
             self.day["punch out"] = timecard.getCurrentTime()
             timecard.weekly_total_hours += timecard.getTimeDiffInHours(
-                timecard.structTimeToDateTime(self.day["punch out"]), 
+                timecard.structTimeToDateTime(self.day["punch out"]),
                 timecard.structTimeToDateTime(self.day["punch in"]))
 
     def setpunches(self, key, punchvalue):
