@@ -5,6 +5,7 @@ import os
 
 def main():
     x = timecard()
+    directory = "timecards"
     filename = x.getToday() + ".txt"
     timecardpath = os.path.expanduser("~/Documents/timecards/" + filename)
     if os.path.exists(timecardpath):
@@ -29,7 +30,7 @@ def main():
                     x.setpunches("lunch in", punch)
                     punchtoadd = "punch out"
                     message = ""
-        
+
         if punchtoadd == "":
             punchtoadd = "punch in"
 
@@ -48,12 +49,13 @@ def main():
     else:
         punchtoadd = "punch in"
         x.punch()
-        with textfilecreator(filename) as writeFile:
+        with textfilecreator(filename, directory) as writeFile:
             writeFile.write(x.getPunchTime(punchtoadd))
-        
+
         print("Welcome to work!")
         print("Chunck Chunck")
         print("Time card punched!")
 
 if __name__ == "__main__":
     main()
+
